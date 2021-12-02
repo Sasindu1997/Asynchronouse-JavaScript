@@ -60,3 +60,29 @@ fs.promises
 fetch('http://pokeapi.co/api/v2/pokemon/ditto')
     .then((data) => console.log(data))
     .catch((err) => console.error(err));
+
+
+//*************Async/Await*******************/
+
+// load file with async/await
+const loadFile = async () => {
+    try {
+        const data = await fs.promises.readFile('./test.txt', { encoding: 'utf8' });
+        console.log(data);
+    } catch (error) {
+        console.error(error);
+    }
+}
+loadFile();
+
+//fetch pokemon with async/await without error handling
+const fetchPokemon = async (id) => {
+    try {
+        const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+        const data = await res.json();
+        console.log(data);
+    } catch (error) {
+        console.error(error);
+    }
+};
+fetchPokemon();
