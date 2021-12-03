@@ -1,8 +1,10 @@
 import fetch from 'node-fetch';
 import fs from 'fs';
+import request from 'request';
+
 //*****CallBacks*****//
 
-//setTimeout
+setTimeout
 setTimeout(() => {
     console.log('Waited 1 sec.');
 }, 1000);
@@ -86,3 +88,22 @@ const fetchPokemon = async (id) => {
     }
 };
 fetchPokemon();
+
+
+//external URL callbacks
+ const getData = (callback) => {
+    var url = "http://pokeapi.co/api/v2/pokemon/ditto";
+    request(url, function(err, response, body) {
+      if(err) { 
+        console.log(err); 
+        return callback(err);
+      } 
+      const obj = JSON.parse(body);
+      callback(obj);
+    });
+};
+
+function print(data){
+    console.log(data);
+}
+getData(print);
